@@ -1,0 +1,26 @@
+
+body{
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+div{
+    border: 6px dashed;
+}
+
+h1{
+    text-decoration: underline;
+}
+
+p{
+    font-size: 18px;
+}
+
+button{
+    background-color: beige;
+    font-weight: bold;
+}
+
+button:hover{
+    border-color: azure;
+}

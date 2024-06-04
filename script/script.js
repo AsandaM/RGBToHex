@@ -1,62 +1,45 @@
-let inputRed = document.querySelectorAll('input')[0]
-let inputGreen = document.querySelectorAll('input')[1]
-let inputBlue = document.querySelectorAll('input')[2]
-let hex  = document.querySelector('p')
-let button = document.querySelector('button')
 
+let inputRed = document.querySelectorAll('input')[0];
+let inputGreen = document.querySelectorAll('input')[1];
+let inputBlue = document.querySelectorAll('input')[2];
+let hexDisplay = document.querySelectorAll('p')[1];
+let button = document.querySelector('button');
+let color = document.querySelector('div')
 
-// function RGBToHex(r,g,b) {
-
+function rgbToHex(r, g, b) {
+    // Function to convert a single number to a two-digit hex string
+    function componentToHex(component) {
+        const hexChars = "0123456789ABCDEF";
+        let high = Math.floor(component / 16); //method rounds a number DOWN to the nearest integer
+        let low = component % 16;
+        return hexChars[high] + hexChars[low];
+    }
     
-//     r = r.toString(16);
-//     g = g.toString(16);
-//     b = b.toString(16);
-  
-//     if (r.length == 1)
-//       r = "0" + r;
-//     if (g.length == 1)
-//       g = "0" + g;
-//     if (b.length == 1)
-//       b = "0" + b;
-  
-//     return "#" + r + g + b;
-//   }
-
-
-// function RGBToHex() {
-//     let arr = [input.value].join().split(' ')
-//     console.log(arr)
-  
-//   }
-
-// console.log(RGBToHex())
-
-
-
-function rgbToHex(red, green, blue) {
+    // Convert each component to hex and concatenate
+    let redHex = componentToHex(r);
+    let greenHex = componentToHex(g);
+    let blueHex = componentToHex(b);
     
-    red = parseInt(red).toString(16)
-    green = parseInt(green).toString(16)
-    blue = parseInt(blue).toString(16)
-
-    if (red.length == 1) 
-        red = "0" + red;
-    if (green.length == 1) 
-        green = "0" + green;
-    if (blue.length == 1) 
-        blue = "0" + blue;
-    
-     return  red + green + blue
-
-
+    return `#${redHex}${greenHex}${blueHex}`;
 }
 
-function convertToHex() {
-    let r = inputRed.value
-    let g = inputGreen.value
-    let b = inputBlue.value
+function convertRGBtoHex() {
+    // Get the RGB values from the input fields
+    let red = parseInt(inputRed.value);
+    let green = parseInt(inputGreen.value);
+    let blue = parseInt(inputBlue.value);
+    
+    // Ensure the values are within the valid range (0-255)
+    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
+        hexDisplay.innerText = "Invalid RGB values!";
+        return;
+    }
 
-    hex.innerText = '#' + rgbToHex(r,g,b)
+    // Convert the RGB values to hex and display the result
+    let hexColor = rgbToHex(red, green, blue);
+    hexDisplay.innerText = hexColor;
+    
+    color.style.borderColor = hexColor
 }
 
-button.addEventListener('click', convertToHex)
+button.addEventListener('click', convertRGBtoHex);
